@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h4>Token {{ token.token_number }}</h4>
+<p>Doctor: {{ token.doctor_name }}</p>
+<p>Date: {{ token.created_at.strftime("%d-%m-%Y %H:%M") }}</p>
+<p>Status: <strong>{{ token.status }}</strong></p>
+<hr/>
+{% if token.status == 'completed' %}
+  <h5>Diagnosis</h5>
+  <p>{{ token.diagnosis }}</p>
+  <h5>Prescription / Medicines</h5>
+  <p>{{ token.prescription }}</p>
+  <a class="btn btn-outline-primary" href="{{ url_for('prescription_pdf', token_id=token.id) }}">Download Prescription (PDF)</a>
+{% else %}
+  <p>No diagnosis/prescription yet. Please wait for doctor to complete appointment.</p>
+{% endif %}
+{% endblock %}

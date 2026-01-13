@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% block title %} Admission Inquiry {% endblock %}
+{% block content %}
+
+<style>
+/* inquiry */
+
+
+.form-wrapper{
+    max-width:900px;
+    margin:auto;
+    background:#e2fbff;
+    border-radius:22px;
+    border:2px solid #8dd3d6;
+    padding:30px 40px;
+}
+
+h2{
+    text-align:center;
+    color:#0097a7;
+    margin-bottom:5px;
+}
+
+p.center{
+    text-align:center;
+    margin-top:0;
+    color:#555;
+}
+
+.row{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.input-group{
+    flex:1;
+    min-width:260px;
+    display:flex;
+    flex-direction:column;
+}
+
+input, select, textarea{
+    padding:12px;
+    border-radius:8px;
+    border:1.5px solid #8dd3d6;
+    outline:none;
+    background:white;
+}
+
+textarea{
+    min-height:120px;
+}
+
+label{
+    font-weight:600;
+    margin-bottom:4px;
+    color:#0097a7;
+}
+
+button{
+    background:#0097a7;
+    color:white;
+    padding:12px 30px;
+    border:none;
+    border-radius:30px;
+    display:block;
+    margin:18px auto 0 auto;
+    font-size:16px;
+    cursor:pointer;
+}
+
+
+</style>
+
+
+
+
+<section class="admission-section inquiry-section">
+
+   <div class="form-wrapper">
+    <h2>SEND US A MESSAGE</h2>
+    <p class="center">Fill out the form below and we'll get back to you as soon as possible</p>
+
+    <form method="POST" action="{{ url_for('admission_inquire') }}" onsubmit="return validateForm()">
+
+        <div class="row">
+            <div class="input-group">
+                <label>First Name *</label>
+                <input type="text" name="name" placeholder="Dr. Faiyaz Ahamd" required>
+            </div>
+
+            <div class="input-group">
+                <label>Phone Number *</label>
+                <input type="text" name="phone" placeholder="123-456-7890" required>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-group">
+                <label>Email Address *</label>
+                <input type="email" name="email" placeholder="xyz@example.com" required>
+            </div>
+
+            <div class="input-group">
+                <label>Neet Score *</label>
+                <input type="text" id="neet_score" name="neet_score" placeholder="Enter your NEET score" required>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-group">
+                <label>Course *</label>
+                <select name="course" required>
+                    <option value="">Select Course</option>
+                    <option>MBBS</option>
+                    <option>BDS</option>
+                    <option>BHMS</option>
+                    <option>BAMS</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label>Message *</label>
+            <textarea name="message" placeholder="Write your message here..." required></textarea>
+        </div>
+
+        <button type="submit">Send Message</button>
+    </form>
+</div>
+
+</section>
+
+
+
+{% endblock %}

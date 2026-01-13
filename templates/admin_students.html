@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <div>
+    <h3>Admin: Student Registrations</h3>
+    <p class="text-muted mb-0">View all registered students.</p>
+  </div>
+  <div class="d-flex gap-2">
+    <a href="{{ url_for('admin_contacts') }}" class="btn btn-outline-dark">Contacts</a>
+    <a href="{{ url_for('admin_register_student') }}" class="btn btn-success">Register New Student</a>
+    <a href="{{ url_for('admin_list') }}" class="btn btn-outline-secondary">Tokens</a>
+    <a href="{{ url_for('admin_admissions') }}" class="btn btn-outline-primary">Admissions</a>
+    <a href="{{ url_for('admin_jobs') }}" class="btn btn-outline-info">Job Applications</a>
+    <a href="{{ url_for('admin_logout') }}" class="btn btn-outline-danger">Logout Admin</a>
+  </div>
+</div>
+<hr/>
+
+{% if students %}
+  <div class="table-responsive">
+    <table class="table table-striped align-middle">
+      <thead>
+        <tr>
+          <th>Photo</th>
+          <th>Student ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Course</th>
+          <th>Year</th>
+          <th>Registered</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for student in students %}
+        <tr>
+          <td>
+            {% if student.photo_path %}
+              <img src="{{ url_for('static', filename=student.photo_path) }}" 
+                   alt="{{ student.name }}" 
+                   class="img-thumbnail" 
+                   style="width: 60px; height: 60px; object-fit: cover;">
+            {% else %}
+              <div class="bg-secondary text-white rounded d-flex align-items-center justify-content-center" 
+                   style="width: 60px; height: 60px;">
+                <small>No Photo</small>
+              </div>
+            {% endif %}
+          </td>
+          <td><strong>{{ student.student_id }}</strong></td>
+          <td>{{ student.name }}</td>
+          <td>{{ student.email }}</td>
+          <td>{{ student.phone }}</td>
+          <td>{{ student.course }}</td>
+          <td>{{ student.year }}</td>
+          <td>{{ student.created_at.strftime("%d-%m-%Y %H:%M") }}</td>
+          <td>
+            <div class="d-flex gap-1">
+              <a href="{{ url_for('admin_update_student', student_id=student.id) }}" class="btn btn-sm btn-outline-primary">Update</a>
+              <form method="POST" action="{{ url_for('admin_delete_student', student_id=student.id) }}" onsubmit="return confirm('Delete this student registration?');" style="display: inline;">
+                <button class="btn btn-sm btn-outline-danger" type="submit">Delete</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% else %}
+  <p>No student registrations yet.</p>
+{% endif %}
+{% endblock %}

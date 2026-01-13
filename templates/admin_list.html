@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <div>
+    <h3>Admin: Token Management</h3>
+    <p class="text-muted mb-0">View and update all patient tokens.</p>
+  </div>
+  <div class="d-flex gap-2">
+    <a href="{{ url_for('admin_contacts') }}" class="btn btn-outline-dark">Contacts</a>
+    <a href="{{ url_for('admin_admissions') }}" class="btn btn-outline-primary">Admissions Inquire</a>
+    <a href="{{ url_for('admin_online_admissions') }}" class="btn btn-outline-warning">Online Admissions</a>
+    <a href="{{ url_for('admin_students') }}" class="btn btn-outline-success">Students</a>
+    <a href="{{ url_for('admin_jobs') }}" class="btn btn-outline-info">Job Applications</a>
+    <a href="{{ url_for('admin_logout') }}" class="btn btn-outline-danger">Logout Admin</a>
+  </div>
+</div>
+<hr/>
+{% if tokens %}
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Token</th>
+        <th>Patient</th>
+        <th>Doctor</th>
+        <th>Date</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for t in tokens %}
+      <tr>
+        <td>{{ t.token_number }}</td>
+        <td>{{ t.user.name }} ({{ t.user.aadhar }})</td>
+        <td>{{ t.doctor_name }}</td>
+        <td>{{ t.created_at.strftime("%d-%m-%Y %H:%M") }}</td>
+        <td><span class="badge {% if t.status == 'completed' %}bg-success{% else %}bg-warning{% endif %}">{{ t.status }}</span></td>
+        <td class="d-flex gap-2">
+          <a class="btn btn-sm btn-primary" href="{{ url_for('admin_update', token_id=t.id) }}">Update</a>
+          <form method="POST" action="{{ url_for('admin_delete_token', token_id=t.id) }}" onsubmit="return confirm('Delete this token?');">
+            <button class="btn btn-sm btn-outline-danger" type="submit">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>No tokens found.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <div>
+    <h3>Admin: Admission Inquiries</h3>
+    <p class="text-muted mb-0">View all submitted admission inquiries.</p>
+  </div>
+  <div class="d-flex gap-2">
+    <a href="{{ url_for('admin_contacts') }}" class="btn btn-outline-dark">Contacts</a>
+    <a href="{{ url_for('admin_list') }}" class="btn btn-outline-secondary">Tokens</a>
+    <a href="{{ url_for('admin_students') }}" class="btn btn-outline-success">Students</a>
+    <a href="{{ url_for('admin_jobs') }}" class="btn btn-outline-info">Job Applications</a>
+    <a href="{{ url_for('admin_logout') }}" class="btn btn-outline-danger">Logout Admin</a>
+  </div>
+</div>
+<hr/>
+
+{% if inquiries %}
+  <div class="table-responsive">
+    <table class="table table-striped align-middle">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Email</th>
+          <th>NEET Score</th>
+          <th>Course</th>
+          <th>Message</th>
+          <th>Submitted</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for q in inquiries %}
+        <tr>
+          <td>{{ q.name }}</td>
+          <td>{{ q.phone }}</td>
+          <td>{{ q.email }}</td>
+          <td>{{ q.neet_score }}</td>
+          <td>{{ q.course }}</td>
+          <td style="white-space: pre-wrap;">{{ q.message }}</td>
+          <td>{{ q.created_at.strftime("%d-%m-%Y %H:%M") }}</td>
+          <td>
+            <form method="POST" action="{{ url_for('admin_delete_admission', inquiry_id=q.id) }}" onsubmit="return confirm('Delete this inquiry?');">
+              <button class="btn btn-sm btn-outline-danger" type="submit">Delete</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% else %}
+  <p>No admission inquiries yet.</p>
+{% endif %}
+{% endblock %}

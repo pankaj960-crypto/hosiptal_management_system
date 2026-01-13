@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Welcome, {{ user.name }}</h3>
+<p>Aadhar: {{ user.aadhar }} • Age: {{ user.age }} • Mobile: {{ user.mobile }}</p>
+<a class="btn btn-primary" href="{{ url_for('get_token') }}">Get Token</a>
+
+<hr/>
+<h5>Your Tokens</h5>
+{% if tokens %}
+  <table class="table">
+    <thead><tr><th>Token</th><th>Doctor</th><th>Date</th><th>Status</th><th>Action</th></tr></thead>
+    <tbody>
+      {% for t in tokens %}
+      <tr>
+        <td>{{ t.token_number }}</td>
+        <td>{{ t.doctor_name }}</td>
+        <td>{{ t.created_at.strftime("%d-%m-%Y %H:%M") }}</td>
+        <td>{{ t.status }}</td>
+        <td>
+          <a class="btn btn-sm btn-info" href="{{ url_for('view_record', token_id=t.id) }}">View</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>No tokens yet.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Madhubani Medical College & Hospital</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" integrity="sha384-tViUnnbYAV00FLIhhi3v/dWt3Jxw4gZQcNoSCxCIFNJVCx7/D55/wXsrNIRANwdD" crossorigin="anonymous">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm">
+      <div class="container">
+        <a class="navbar-brand" href="{{ url_for('home') }}">
+          <img src="https://mmcworld.org/assets/logo-CXzikaTA.svg" alt="logo" style="height:40px;"/>
+          Madhubani Medical
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+          <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        {% for item in ['Home','About','Academics','Hospitals','Faculty','Gallery','Student','Admission','Career','Contact','Admin'] %}
+          {% if item == 'Student' %}
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="student.html" id="studentDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {{ item }}
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="studentDropdown">
+                {% if session.get('student_id') %}
+                  <li><a class="dropdown-item" href="{{url_for('student_dashboard')}}">Dashboard</a></li>
+                  <li><a class="dropdown-item" href="{{url_for('student_logout')}}">Logout</a></li>
+                {% else %}
+                  <li><a class="dropdown-item" href="{{url_for('student_login')}}">Login</a></li>
+                {% endif %}
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="{{url_for('student')}}">About</a></li>
+                <li><a class="dropdown-item" href="#">Notices</a></li>
+                <li><a class="dropdown-item" href="{{url_for('students')}}">Student List</a></li>
+                <li><a class="dropdown-item" href="{{url_for('results')}}">Examination Result</a></li>
+              </ul>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link"
+                 href="{% if item == 'Home' %}{{ url_for('home') }}
+                       {% elif item =='About' %}{{ url_for('about') }}
+                       {% elif item =='Academics' %}{{ url_for('academics') }}
+                       {% elif item =='Hospitals' %}{{ url_for('hospitals') }}
+                       {% elif item =='Faculty' %}{{ url_for('faculty') }}
+                       {% elif item =='Gallery' %}{{ url_for('gallery') }}
+                       {% elif item =='Admission' %}{{ url_for('admission') }}
+                       {% elif item =='Career' %}{{ url_for('career') }}
+                       {% elif item =='Contact' %}{{ url_for('contact') }}
+                       {% elif item =='Admin' %}{{ url_for('admin_list') }}
+                       {% endif %}">
+                {{ item }}
+              </a>
+            </li>
+          {% endif %}
+             {% endfor %}
+            {% if session.get('user_id') %}
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Logout</a></li>
+            {% else %}
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('register') }}">Register</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Login</a></li>
+          {% endif %}
+
+      </ul>
+    </div>
+
+
+      </div>
+    </nav>
+
+    <div class="container mt-3">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, msg in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+              {{ msg }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+    </div>
+
+    <main class="container my-4">
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer class="bg-dark text-white pt-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <img src="https://mmcworld.org/assets/logo-CXzikaTA.svg" alt="logo" style="height:60px;">
+            <h6 class="mt-2">Madhubani Medical College & Hospital, Madhubani, Bihar</h6>
+            <p>MilliTrust Logo<br>College Important Lines</p>
+          </div>
+          <div class="col-md-4">
+            <h6>College Office</h6>
+            <p>:06276-296222<br>Academic Office:09303-171-877<br>IT Office:06276-296223<br>:9570142222</p>
+            <p>Principal Office:6287543402<br>:93031718555<br>Admission-in-Charge:6287543402</p>
+          </div>
+          <div class="col-md-4">
+            <h6>Hospital Emergency Lines</h6>
+            <p>Reception:9570142222<br>General Ward/Ambulance:9031718222<br>Emergency:9031718444<br>Ayushman Bharat:9031718333</p>
+            <h6>Useful Links</h6>
+            <p>Admissions | Affiliations | Fee Structure | Hostel Rules | Permissions & Recognition | Anti Ragging</p>
+            <p>Stay Tuned @madhubanimedicity</p>
+          </div>
+        </div>
+        <div class="text-center py-3">© 2025 Madhubani Medical College & Hospital "created by pankaj"</div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='css/scripts.js') }}"></script>
+  <script type="text/javascript">!function(t,e){t.artibotApi={l:[],t:[],on:function(){this.l.push(arguments)},trigger:function(){this.t.push(arguments)}};var a=!1,i=e.createElement("script");i.async=!0,i.type="text/javascript",i.src="https://app.artibot.ai/loader.js",e.getElementsByTagName("head").item(0).appendChild(i),i.onreadystatechange=i.onload=function(){if(!(a||this.readyState&&"loaded"!=this.readyState&&"complete"!=this.readyState)){new window.ArtiBot({i:"4dee441b-0d66-4147-b592-d37ad8d2f24a"});a=!0}}}(window,document);</script>
+  </body>
+</html>

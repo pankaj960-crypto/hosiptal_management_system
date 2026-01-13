@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <div>
+    <h3>Admin: Register New Student</h3>
+    <p class="text-muted mb-0">Register a new student in the system.</p>
+  </div>
+  <div class="d-flex gap-2">
+    <a href="{{ url_for('admin_contacts') }}" class="btn btn-outline-dark">Contacts</a>
+    <a href="{{ url_for('admin_students') }}" class="btn btn-outline-secondary">Back to Students</a>
+    <a href="{{ url_for('admin_logout') }}" class="btn btn-outline-danger">Logout Admin</a>
+  </div>
+</div>
+<hr/>
+
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <form method="POST" enctype="multipart/form-data">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Student ID <small class="text-muted">(Optional - Auto-generated if left blank)</small></label>
+          <input name="student_id" type="text" class="form-control" placeholder="e.g., STU2024001">
+          <small class="text-muted">Leave blank to auto-generate: STUYYYYNNN format</small>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Full Name <span class="text-danger">*</span></label>
+          <input name="name" type="text" class="form-control" required>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Email <span class="text-danger">*</span></label>
+          <input name="email" type="email" class="form-control" required>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Phone <span class="text-danger">*</span></label>
+          <input name="phone" type="tel" class="form-control" required>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Course <span class="text-danger">*</span></label>
+          <select name="course" class="form-select" required>
+            <option value="">Select Course</option>
+            <option value="MBBS">MBBS</option>
+            <option value="BDS">BDS</option>
+            <option value="BPT">BPT</option>
+            <option value="B.Sc Nursing">B.Sc Nursing</option>
+            <option value="M.Sc Nursing">M.Sc Nursing</option>
+            <option value="MD">MD</option>
+            <option value="MS">MS</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Year <span class="text-danger">*</span></label>
+          <select name="year" class="form-select" required>
+            <option value="">Select Year</option>
+            <option value="1st Year">1st Year</option>
+            <option value="2nd Year">2nd Year</option>
+            <option value="3rd Year">3rd Year</option>
+            <option value="4th Year">4th Year</option>
+            <option value="5th Year">5th Year</option>
+            <option value="Internship">Internship</option>
+            <option value="PG 1st Year">PG 1st Year</option>
+            <option value="PG 2nd Year">PG 2nd Year</option>
+            <option value="PG 3rd Year">PG 3rd Year</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Password <span class="text-danger">*</span></label>
+        <input name="password" type="password" class="form-control" required minlength="6">
+        <small class="text-muted">Minimum 6 characters</small>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Student Photo <small class="text-muted">(Optional)</small></label>
+        <input name="photo" type="file" class="form-control" accept="image/*">
+        <small class="text-muted">Allowed formats: PNG, JPG, JPEG, GIF, WEBP (Max 16MB)</small>
+      </div>
+
+      <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-primary">Register Student</button>
+        <a href="{{ url_for('admin_students') }}" class="btn btn-secondary">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

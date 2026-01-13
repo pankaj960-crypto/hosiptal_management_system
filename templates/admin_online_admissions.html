@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <div>
+    <h3>Admin: Online Admissions</h3>
+    <p class="text-muted mb-0">View all submitted online admission forms.</p>
+  </div>
+  <div class="d-flex gap-2">
+    <a href="{{ url_for('admin_contacts') }}" class="btn btn-outline-dark">Contacts</a>
+    <a href="{{ url_for('admin_list') }}" class="btn btn-outline-secondary">Tokens</a>
+    <a href="{{ url_for('admin_admissions') }}" class="btn btn-outline-primary">Admission Inquire</a>
+    <a href="{{ url_for('admin_students') }}" class="btn btn-outline-success">Students</a>
+    <a href="{{ url_for('admin_jobs') }}" class="btn btn-outline-info">Job Applications</a>
+    <a href="{{ url_for('admin_logout') }}" class="btn btn-outline-danger">Logout Admin</a>
+  </div>
+</div>
+<hr/>
+
+{% if admissions %}
+  <div class="table-responsive">
+    <table class="table table-striped align-middle">
+      <thead>
+        <tr>
+          <th>Course Category</th>
+          <th>Course Name</th>
+          <th>Student Name</th>
+          <th>Mobile</th>
+          <th>Email</th>
+          <th>City</th>
+          <th>State</th>
+          <th>Submitted</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for a in admissions %}
+        <tr>
+          <td>{{ a.student_course_category }}</td>
+          <td style="white-space: pre-wrap;">{{ a.student_course_name }}</td>
+          <td>{{ a.student_name }}</td>
+          <td>{{ a.student_mobile }}</td>
+          <td>{{ a.student_email }}</td>
+          <td>{{ a.student_city }}</td>
+          <td>{{ a.student_state }}</td>
+          <td>{{ a.student_created_at.strftime("%d-%m-%Y %H:%M") if a.student_created_at else "-" }}</td>
+          <td>
+            <div class="d-flex gap-1">
+              <button class="btn btn-sm btn-outline-info" type="button" data-bs-toggle="modal" data-bs-target="#detailModal{{ a.id }}">
+                View Details
+              </button>
+              <a href="{{ url_for('admin_online_admission_pdf', admission_id=a.id) }}" class="btn btn-sm btn-outline-primary" target="_blank">
+                Download PDF
+              </a>
+              <form method="POST" action="{{ url_for('admin_delete_online_admission', admission_id=a.id) }}" onsubmit="return confirm('Delete this online admission?');" style="display: inline;">
+                <button class="btn btn-sm btn-outline-danger" type="submit">Delete</button>
+              </form>
+            </div>
+            
+            <!-- Detail Modal -->
+            <div class="modal fade" id="detailModal{{ a.id }}" tabindex="-1">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Admission Details - {{ a.student_name }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col-md-6 mb-3">
+                        <strong>Photo:</strong><br>
+                        {% if a.student_photo %}
+                          <img src="{{ url_for('static', filename=a.student_photo) }}" class="img-thumbnail" style="max-width: 150px;">
+                        {% else %}
+                          <span class="text-muted">Not provided</span>
+                        {% endif %}
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <strong>Personal Information:</strong><br>
+                        <strong>Name:</strong> {{ a.student_name }}<br>
+                        <strong>Father's Name:</strong> {{ a.student_father_name }}<br>
+                        <strong>Mother's Name:</strong> {{ a.student_mother_name }}<br>
+                        <strong>Gender:</strong> {{ a.student_gender }}<br>
+                        <strong>DOB:</strong> {{ a.student_dob.strftime('%d-%m-%Y') if a.student_dob else 'N/A' }}<br>
+                        <strong>Aadhar:</strong> {{ a.student_aadhar_number }}<br>
+                        <strong>Mobile:</strong> {{ a.student_mobile }}<br>
+                        <strong>Email:</strong> {{ a.student_email }}
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-md-6 mb-3">
+                        <strong>Address:</strong><br>
+                        {{ a.student_address }}<br>
+                        {{ a.student_city }}, {{ a.student_state }}
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <strong>Course Information:</strong><br>
+                        <strong>Category:</strong> {{ a.student_course_category }}<br>
+                        <strong>Course:</strong> {{ a.student_course_name }}
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="mb-3">
+                      <strong>Academic Year Details:</strong><br>
+                      <table class="table table-sm table-bordered">
+                        <thead>
+                          <tr>
+                            <th>Year</th>
+                            <th>Stream</th>
+                            <th>Board/University</th>
+                            <th>Result</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>10th</td>
+                            <td>{{ a.student_year1_stream }}</td>
+                            <td>{{ a.student_year1_board }}</td>
+                            <td>{{ a.student_year1_result }}</td>
+                          </tr>
+                          <tr>
+                            <td>12th</td>
+                            <td>{{ a.student_year2_stream }}</td>
+                            <td>{{ a.student_year2_board }}</td>
+                            <td>{{ a.student_year2_result }}</td>
+                          </tr>
+                          <tr>
+                            <td>Other</td>
+                            <td>{{ a.student_year3_stream }}</td>
+                            <td>{{ a.student_year3_board }}</td>
+                            <td>{{ a.student_year3_result }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <hr>
+                    <div class="mb-3">
+                      <strong>Attached Documents:</strong><br>
+                      <strong>Photo:</strong> {% if a.student_photo %}<a href="{{ url_for('static', filename=a.student_photo) }}" target="_blank">View</a>{% else %}Not provided{% endif %}<br>
+                      <strong>10th Marksheet:</strong> {% if a.student_10th_marksheet %}<a href="{{ url_for('static', filename=a.student_10th_marksheet) }}" target="_blank">View</a>{% else %}Not provided{% endif %}<br>
+                      <strong>12th Marksheet:</strong> {% if a.student_12th_marksheet %}<a href="{{ url_for('static', filename=a.student_12th_marksheet) }}" target="_blank">View</a>{% else %}Not provided{% endif %}<br>
+                      <strong>ID Proof:</strong> {% if a.student_id_proof %}<a href="{{ url_for('static', filename=a.student_id_proof) }}" target="_blank">View</a>{% else %}Not provided{% endif %}
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <a href="{{ url_for('admin_online_admission_pdf', admission_id=a.id) }}" class="btn btn-primary" target="_blank">Download PDF</a>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% else %}
+  <p>No online admissions yet.</p>
+{% endif %}
+{% endblock %}
+

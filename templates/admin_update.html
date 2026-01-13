@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<h4>Admin: Update Token {{ token.token_number }}</h4>
+<p>Doctor: {{ token.doctor_name }} | User ID: {{ token.user_id }}</p>
+<form method="POST">
+  <div class="mb-3">
+    <label>Admin Password</label>
+    <input name="admin_pass" type="password" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label>Diagnosis</label>
+    <textarea name="diagnosis" class="form-control" rows="3">{{ token.diagnosis or '' }}</textarea>
+  </div>
+  <div class="mb-3">
+    <label>Prescription (Medicines & instructions)</label>
+    <textarea name="prescription" class="form-control" rows="4">{{ token.prescription or '' }}</textarea>
+  </div>
+  <button class="btn btn-primary">Save</button>
+</form>
+{% endblock %}

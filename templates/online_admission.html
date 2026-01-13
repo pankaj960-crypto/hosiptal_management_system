@@ -1,0 +1,305 @@
+{% extends "base.html" %}
+{% block title %} Online Admission form  {% endblock %}
+{% block content %}
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Online Admission Form</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body{
+    background:#0b6a8a;
+}
+.form-section{
+    background:#d9e78b;
+    border-radius:10px;
+}
+label{
+    font-weight:600;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container my-4">
+
+    <!-- HEADER -->
+    <div class="text-center text-white mb-3">
+        <h2>ONLINE ADMISSION FORM</h2>
+    </div>
+
+    <!-- FORM -->
+    <div class="p-4 form-section">
+
+<form method="POST" enctype="multipart/form-data">
+
+<div class="row g-3">
+
+<div class="col-md-6">
+<label>Course Category *</label>
+<select class="form-select" name="student_course_category" required>
+<option value="">Select Course</option>
+<option value="MBBS">MBBS</option>
+<option value="MD/MS">MD/MS</option>
+<option value="DM/MCH">DM/MCH</option>
+<option value="NursingPrograms">NursingPrograms</option>
+<option value="Paramedical & Allied Health">Paramedical & Allied Health</option>
+<option value="Pharmacy">Pharmacy</option>
+</select>
+</div>
+
+<div class="col-md-6">
+<label>Course Name *</label>
+<select class="form-select" name="student_course_name" required>
+          <option value="">-- Select Course --</option>
+          <option>MBBS (Bachelor of Medicine & Bachelor of Surgery)</option>
+          <option>BDS (Bachelor of Dental Surgery)</option>
+          <option>BHMS (Homeopathy)</option>
+          <option>BAMS (Ayurveda)</option>
+          <option>BUMS (Unani Medicine)</option>
+          <option>BSMS (Siddha Medicine)</option>
+          <option>BNYS (Naturopathy & Yogic Science)</option>
+      
+          <!-- Postgraduate MD/MS -->
+          <optgroup label="MD / MS Specializations">
+              <option>MD – General Medicine</option>
+              <option>MD – Pediatrics</option>
+              <option>MD – Dermatology (Skin)</option>
+              <option>MD – Psychiatry</option>
+              <option>MD – Radiology</option>
+              <option>MD – Anesthesiology</option>
+              <option>MD – Community Medicine</option>
+              <option>MD – Pathology</option>
+              <option>MD – Pharmacology</option>
+              <option>MD – Microbiology</option>
+              <option>MD – Emergency Medicine</option>
+      
+              <option>MS – General Surgery</option>
+              <option>MS – Orthopedics</option>
+              <option>MS – Obstetrics & Gynecology</option>
+              <option>MS – Ophthalmology (Eye)</option>
+              <option>MS – ENT (Ear Nose Throat)</option>
+          </optgroup>
+      
+          <!-- Super Speciality -->
+          <optgroup label="Super Speciality (DM / MCh)">
+              <option>DM – Cardiology</option>
+              <option>DM – Neurology</option>
+              <option>DM – Gastroenterology</option>
+              <option>DM – Nephrology</option>
+              <option>DM – Endocrinology</option>
+      
+              <option>MCh – Neurosurgery</option>
+              <option>MCh – Plastic Surgery</option>
+              <option>MCh – Cardiothoracic Surgery</option>
+              <option>MCh – Urology</option>
+              <option>MCh – Pediatric Surgery</option>
+          </optgroup>
+      
+          <!-- Nursing -->
+          <optgroup label="Nursing Programs">
+              <option>GNM – General Nursing & Midwifery</option>
+              <option>ANM – Auxiliary Nurse Midwifery</option>
+              <option>BSc Nursing</option>
+              <option>Post Basic BSc Nursing</option>
+              <option>MSc Nursing</option>
+          </optgroup>
+      
+          <!-- Paramedical -->
+          <optgroup label="Paramedical & Allied Health">
+              <option>BPT – Bachelor of Physiotherapy</option>
+              <option>MPT – Master of Physiotherapy</option>
+              <option>BOT – Bachelor of Occupational Therapy</option>
+              <option>B.Sc Operation Theatre Technology</option>
+              <option>B.Sc Medical Lab Technology (MLT)</option>
+              <option>B.Sc Radiology & Imaging Technology</option>
+              <option>B.Sc Optometry</option>
+              <option>B.Sc Dialysis Technology</option>
+              <option>B.Sc Emergency & Trauma Care</option>
+              <option>B.Sc Anesthesia Technology</option>
+              <option>Cardiac Care Technology</option>
+              <option>Perfusion Technology</option>
+              <option>Physician Assistant</option>
+          </optgroup>
+      
+          <!-- Pharmacy -->
+          <optgroup label="Pharmacy">
+              <option>D.Pharm – Diploma in Pharmacy</option>
+              <option>B.Pharm – Bachelor of Pharmacy</option>
+              <option>M.Pharm – Master of Pharmacy</option>
+              <option>Pharm D – Doctor of Pharmacy</option>
+          </optgroup>
+</select>
+</div>
+
+<div class="col-md-6">
+<label>Student Name *</label>
+<input type="text" name="student_name" class="form-control" required>
+</div>
+
+<div class="col-md-6">
+<label>Father's Name *</label>
+<input type="text" name="student_father_name" class="form-control" required>
+</div>
+
+<div class="col-md-6">
+<label>Mother Name *</label>
+<input type="text" name="student_mother_name" class="form-control" required>
+</div>
+
+<div class="col-md-6">
+<label>Gender *</label>
+<select class="form-select" name="student_gender" required>
+<option value="">Select Gender</option>
+<option value="Male">Male</option>
+<option value="Female">Female</option>
+<option value="Other">Other</option>
+</select>
+</div>
+
+<div class="col-md-6">
+<label>Mobile Number *</label>
+<input type="text" name="student_mobile" class="form-control" required>
+</div>
+
+<div class="col-md-6">
+<label>Email *</label>
+<input type="email" name="student_email" class="form-control" required>
+</div>
+
+<div class="col-md-6">
+<label>State *</label>
+<select class="form-select" name="student_state" required>
+<option value="">Select State</option>
+<option value="Andhra Pradesh">Andhra Pradesh</option>
+  <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+  <option value="Assam">Assam</option>
+  <option value="Bihar">Bihar</option>
+  <option value="Chhattisgarh">Chhattisgarh</option>
+  <option value="Goa">Goa</option>
+  <option value="Gujarat">Gujarat</option>
+  <option value="Haryana">Haryana</option>
+  <option value="Himachal Pradesh">Himachal Pradesh</option>
+  <option value="Jharkhand">Jharkhand</option>
+  <option value="Karnataka">Karnataka</option>
+  <option value="Kerala">Kerala</option>
+  <option value="Madhya Pradesh">Madhya Pradesh</option>
+  <option value="Maharashtra">Maharashtra</option>
+  <option value="Manipur">Manipur</option>
+  <option value="Meghalaya">Meghalaya</option>
+  <option value="Mizoram">Mizoram</option>
+  <option value="Nagaland">Nagaland</option>
+  <option value="Odisha">Odisha</option>
+  <option value="Punjab">Punjab</option>
+  <option value="Rajasthan">Rajasthan</option>
+  <option value="Sikkim">Sikkim</option>
+  <option value="Tamil Nadu">Tamil Nadu</option>
+  <option value="Telangana">Telangana</option>
+  <option value="Tripura">Tripura</option>
+  <option value="Uttar Pradesh">Uttar Pradesh</option>
+  <option value="Uttarakhand">Uttarakhand</option>
+  <option value="West Bengal">West Bengal</option>
+</select>
+</div>
+
+<div class="col-md-6">
+<label>City *</label>
+<input type="text" name="student_city" class="form-control" required>
+</div>
+
+<div class="col-12">
+<label>Address *</label>
+<textarea name="student_address" class="form-control" rows="2" required></textarea>
+</div>
+
+<div class="col-md-6">
+<label>DOB *</label>
+<input type="date" name="student_dob" class="form-control" required>
+</div>
+
+<div class="col-md-6">
+<label>Aadhar / Citizenship No *</label>
+<input type="text" name="student_aadhar_number" class="form-control" required>
+</div>
+
+<div class="col-12">
+<label>Latest Photo *</label>
+<input type="file" name="student_photo" class="form-control" required>
+</div>
+
+<div class="col-12">
+<label>10th Marksheet *</label>
+<input type="file" name="student_10th_marksheet" class="form-control" required>
+</div>
+
+<div class="col-12">
+<label>12th Marksheet *</label>
+<input type="file" name="student_12th_marksheet" class="form-control" required>
+</div>
+
+<div class="col-12">
+<label>ID Proof *</label>
+<input type="file" name="student_id_proof" class="form-control" required>
+</div>
+
+</div>
+
+<hr>
+
+<h5 class="text-center mt-3">Academic Year</h5>
+
+<table class="table table-bordered">
+<thead>
+<tr>
+<th></th>
+<th>Year</th>
+<th>Stream</th>
+<th>Board / University</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10th</td>
+<td><input class="form-control" name="student_year1_year"></td>
+<td><input class="form-control" name="student_year1_stream"></td>
+<td><input class="form-control" name="student_year1_board"></td>
+<td><input class="form-control" name="student_year1_result"></td>
+</tr>
+<tr>
+<td>12th</td>
+<td><input class="form-control" name="student_year2_year"></td>
+<td><input class="form-control" name="student_year2_stream"></td>
+<td><input class="form-control" name="student_year2_board"></td>
+<td><input class="form-control" name="student_year2_result"></td>
+</tr>
+<tr>
+<td>Other</td>
+<td><input class="form-control" name="student_year3_year"></td>
+<td><input class="form-control" name="student_year3_stream"></td>
+<td><input class="form-control" name="student_year3_board"></td>
+<td><input class="form-control" name="student_year3_result"></td>
+</tr>
+</tbody>
+</table>
+
+<div class="text-center">
+<button class="btn btn-danger px-4">Submit</button>
+</div>
+
+</form>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
+{% endblock %}

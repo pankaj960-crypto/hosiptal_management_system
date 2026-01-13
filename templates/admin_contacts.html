@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <div>
+    <h3>Admin: Contact Messages</h3>
+    <p class="text-muted mb-0">View messages submitted from the contact form.</p>
+  </div>
+  <div class="d-flex gap-2">
+    <a href="{{ url_for('admin_list') }}" class="btn btn-outline-secondary">Tokens</a>
+    <a href="{{ url_for('admin_admissions') }}" class="btn btn-outline-primary">Admissions</a>
+    <a href="{{ url_for('admin_students') }}" class="btn btn-outline-success">Students</a>
+    <a href="{{ url_for('admin_jobs') }}" class="btn btn-outline-info">Job Applications</a>
+    <a href="{{ url_for('admin_logout') }}" class="btn btn-outline-danger">Logout Admin</a>
+  </div>
+</div>
+<hr/>
+
+{% if messages %}
+  <div class="table-responsive">
+    <table class="table table-striped align-middle">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Message</th>
+          <th>Submitted</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for m in messages %}
+        <tr>
+          <td>{{ m.name }}</td>
+          <td>{{ m.email }}</td>
+          <td>{{ m.phone or '-' }}</td>
+          <td style="white-space: pre-wrap;">{{ m.message }}</td>
+          <td>{{ m.created_at.strftime("%d-%m-%Y %H:%M") }}</td>
+          <td>
+            <form method="POST" action="{{ url_for('admin_delete_contact', message_id=m.id) }}" onsubmit="return confirm('Delete this message?');">
+              <button class="btn btn-sm btn-outline-danger" type="submit">Delete</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% else %}
+  <p>No contact messages yet.</p>
+{% endif %}
+{% endblock %}

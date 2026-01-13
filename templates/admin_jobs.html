@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <div>
+    <h3>Admin: Job Applications</h3>
+    <p class="text-muted mb-0">View all submitted job applications.</p>
+  </div>
+  <div class="d-flex gap-2">
+    <a href="{{ url_for('admin_contacts') }}" class="btn btn-outline-dark">Contacts</a>
+    <a href="{{ url_for('admin_list') }}" class="btn btn-outline-secondary">Tokens</a>
+    <a href="{{ url_for('admin_admissions') }}" class="btn btn-outline-primary">Admissions</a>
+    <a href="{{ url_for('admin_students') }}" class="btn btn-outline-success">Students</a>
+    <a href="{{ url_for('admin_logout') }}" class="btn btn-outline-danger">Logout Admin</a>
+  </div>
+</div>
+<hr/>
+
+{% if applications %}
+  <div class="table-responsive">
+    <table class="table table-striped align-middle">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Position</th>
+          <th>Department</th>
+          <th>Experience</th>
+          <th>Resume</th>
+          <th>Cover Letter</th>
+          <th>Submitted</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for app in applications %}
+        <tr>
+          <td><strong>{{ app.name }}</strong></td>
+          <td>{{ app.email }}</td>
+          <td>{{ app.phone }}</td>
+          <td>{{ app.job_position }}</td>
+          <td>{{ app.department or '-' }}</td>
+          <td>{{ app.experience or '-' }}</td>
+          <td>
+            {% if app.resume_link %}
+              <a href="{{ app.resume_link }}" target="_blank" class="btn btn-sm btn-outline-primary">View</a>
+            {% else %}
+              <span class="text-muted">-</span>
+            {% endif %}
+          </td>
+          <td>
+            {% if app.cover_letter %}
+              <button class="btn btn-sm btn-outline-info" type="button" data-bs-toggle="modal" data-bs-target="#letterModal{{ app.id }}">
+                View
+              </button>
+              <!-- Modal for cover letter -->
+              <div class="modal fade" id="letterModal{{ app.id }}" tabindex="-1">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Cover Letter - {{ app.name }}</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                      <p style="white-space: pre-wrap;">{{ app.cover_letter }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% else %}
+              <span class="text-muted">-</span>
+            {% endif %}
+          </td>
+          <td>{{ app.created_at.strftime("%d-%m-%Y %H:%M") }}</td>
+          <td>
+            <form method="POST" action="{{ url_for('admin_delete_job', application_id=app.id) }}" onsubmit="return confirm('Delete this job application?');">
+              <button class="btn btn-sm btn-outline-danger" type="submit">Delete</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% else %}
+  <p>No job applications yet.</p>
+{% endif %}
+{% endblock %}

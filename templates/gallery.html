@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <h1>Gallery</h1>
+<style>
+.gallery {
+      display: grid;
+
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+      padding: 50px 30px;
+      justify-items: center;
+    }
+
+    .gallery-item {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-8px);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 15px;
+    }
+
+    .see-more-btn {
+      display: block;
+      margin: 30px auto;
+      padding: 12px 28px;
+      background: #fff;
+      color: #000;
+      border: 2px solid #000;
+      border-radius: 30px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .see-more-btn:hover {
+      background: #000;
+      color: #fff;
+    }
+
+    /* Hide extra images initially */
+    .gallery-item.hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="gallery" id="gallery">
+    <!-- Example 30 images -->
+    <!-- First 9 visible, rest hidden initially -->
+    <div class="gallery-item"><img src="https://mmcworld.org/assets/01-C3hUmznx.webp" alt="Event 1"></div>
+    <div class="gallery-item"><img src="https://mmcworld.org/assets/02-CsWN6LbG.webp" alt="Event 2"></div>
+    <div class="gallery-item"><img src="https://mmcworld.org/assets/03-CLXbcmY_.webp" alt="Event 3"></div>
+    <div class="gallery-item"><img src="https://mmcworld.org/assets/04-BvHtqdyq.webp" alt="Event 4"></div>
+    <div class="gallery-item"><img src="https://mmcworld.org/assets/05-BC5zSCQf.webp" alt="Event 5"></div>
+    <div class="gallery-item"><img src="https://mmcworld.org/assets/06-BqpjKDWh.webp" alt="Event 6"></div>
+    <div class="gallery-item"><img src="https://mmcworld.org/assets/07-DuOMUDW3.webp" alt="Event 7"></div>
+    <div class="gallery-item"><img src="https://mmcworld.org/assets/08-BPJR3739.webp" alt="Event 8"></div>
+    <div class="gallery-item"><img src="https://mmcworld.org/assets/09-CR8WfPY9.webp" alt="Event 9"></div>
+
+    <!-- Hidden images -->
+    <div class="gallery-item hidden"><img src="https://mmcworld.org/assets/10-BhXpOkg0.webp" alt="Event 10"></div>
+    <div class="gallery-item hidden"><img src="https://mmcworld.org/assets/11-DbXpXIV4.webp" alt="Event 11"></div>
+    <div class="gallery-item hidden"><img src="https://mmcworld.org/assets/12-CP32wK1E.webp" alt="Event 12"></div>
+    <div class="gallery-item hidden"><img src="https://mmcworld.org/assets/13-zn3Vtdtw.webp" alt="Event 13"></div>
+    <div class="gallery-item hidden"><img src="https://mmcworld.org/assets/14-I7KpCPnT.webp" alt="Event 14"></div>
+    <div class="gallery-item hidden"><img src="https://mmcworld.org/assets/16-DoWhTAcm.webp" alt="Event 15"></div>
+    <div class="gallery-item hidden"><img src="https://mmcworld.org/assets/17-BcT20Opm.webp" alt="Event 16"></div>
+    <div class="gallery-item hidden"><img src="https://mmcworld.org/assets/18-BZFEY2NZ.webp" alt="Event 17"></div>
+    <div class="gallery-item hidden"><img src="https://mmcworld.org/assets/20-KQaH2B1U.webp" alt="Event 18"></div>
+    <div class="gallery-item hidden"><img src="https://mmcworld.org/assets/21-ABoc_8C4.webp" alt="Event 19"></div>
+    <div class="gallery-item hidden"><img src="https://mmcworld.org/assets/19-igpcLz-R.webp" alt="Event 20"></div>
+    <div class="gallery-item hidden"><img src="https://mmcworld.org/assets/22-D1th00EH.webp" alt="Event 21"></div>
+    <div class="gallery-item hidden"><img src="https://mmcworld.org/assets/23-9QkYJ7vb.webp" alt="Event 22"></div>
+    <div class="gallery-item hidden"><img src="https://mmcworld.org/assets/24-ejXGwBIW.webp" alt="Event 23"></div>
+    <div class="gallery-item hidden"><img src="https://mmcworld.org/assets/25-9yVG96pj.webp" alt="Event 24"></div>
+    <div class="gallery-item hidden"><img src="https://mmcworld.org/assets/26-D6yNpU1Q.webp" alt="Event 25"></div>
+    <div class="gallery-item hidden"><img src="https://mmcworld.org/assets/27-Bu1RbaQM.webp" alt="Event 26"></div>
+    <div class="gallery-item hidden"><img src="https://mmcworld.org/assets/28-Bq08uPCF.webp" alt="Event 27"></div>
+    <div class="gallery-item hidden"><img src="https://mmcworld.org/assets/29-CdNLp5-B.webp" alt="Event 28"></div>
+    <div class="gallery-item hidden"><img src="images/img29.jpg" alt="Event 29"></div>
+    <div class="gallery-item hidden"><img src="images/img30.jpg" alt="Event 30"></div>
+  </div>
+
+  <!-- See More / Less Button -->
+  <button class="see-more-btn" id="seeMoreBtn">See More</button>
+
+  <script>
+    const btn = document.getElementById('seeMoreBtn');
+    const hiddenItems = document.querySelectorAll('.gallery-item.hidden');
+
+    btn.addEventListener('click', () => {
+      const isHidden = hiddenItems[0].classList.contains('hidden');
+
+      if (isHidden) {
+        hiddenItems.forEach(item => item.classList.remove('hidden'));
+        btn.textContent = 'See Less';
+      } else {
+        hiddenItems.forEach(item => item.classList.add('hidden'));
+        btn.textContent = 'See More';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+  </script>
+
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-5">
+    <h3>Student Login</h3>
+    <p class="text-muted">Login to access your student dashboard</p>
+    <form method="POST">
+      <div class="mb-3">
+        <label class="form-label">Student ID</label>
+        <input name="student_id" type="text" class="form-control" placeholder="e.g., STU2024001" required autofocus>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input name="password" type="password" class="form-control" required>
+      </div>
+      <button class="btn btn-primary">Login</button>
+    </form>
+    <hr/>
+    <p class="text-muted">Don't have an account? Contact administration for student registration.</p>
+  </div>
+</div>
+{% endblock %}

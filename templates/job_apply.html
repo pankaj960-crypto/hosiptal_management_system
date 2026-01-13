@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <h3>Job Application</h3>
+    <p class="text-muted">Fill out the form below to apply for the position.</p>
+    
+    <form method="POST">
+      <div class="mb-3">
+        <label class="form-label">Full Name *</label>
+        <input name="name" type="text" class="form-control" required>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Email Address *</label>
+          <input name="email" type="email" class="form-control" required>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Phone Number *</label>
+          <input name="phone" type="tel" class="form-control" required>
+        </div>
+      </div>
+      
+      <div class="mb-3">
+        <label class="form-label">Job Position *</label>
+        <input name="job_position" type="text" class="form-control" value="{{ job_position }}" required>
+        <small class="text-muted">The position you are applying for</small>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Department</label>
+          <select name="department" class="form-select">
+            <option value="">Select Department</option>
+            <option>Medical</option>
+            <option>Nursing</option>
+            <option>Academic</option>
+            <option>Administration</option>
+            <option>Laboratory</option>
+            <option>IT Support</option>
+            <option>Research</option>
+          </select>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Years of Experience</label>
+          <input name="experience" type="text" class="form-control" placeholder="e.g., 5 years">
+        </div>
+      </div>
+      
+      <div class="mb-3">
+        <label class="form-label">Resume/CV Link</label>
+        <input name="resume_link" type="url" class="form-control" placeholder="https://drive.google.com/... or other link">
+        <small class="text-muted">Link to your resume or CV (Google Drive, Dropbox, etc.)</small>
+      </div>
+      
+      <div class="mb-3">
+        <label class="form-label">Cover Letter</label>
+        <textarea name="cover_letter" class="form-control" rows="5" placeholder="Tell us why you're interested in this position..."></textarea>
+      </div>
+      
+      <button type="submit" class="btn btn-primary">Submit Application</button>
+      <a href="{{ url_for('career') }}" class="btn btn-secondary">Cancel</a>
+    </form>
+  </div>
+</div>
+{% endblock %}

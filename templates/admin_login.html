@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <h3>Admin Login</h3>
+    <p class="text-muted">Please enter the admin password to access the token management system.</p>
+    <form method="POST">
+      <div class="mb-3">
+        <label>Admin Password</label>
+        <input name="admin_pass" type="password" class="form-control" required autofocus>
+      </div>
+      <button class="btn btn-primary">Login</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

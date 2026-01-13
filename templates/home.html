@@ -1,0 +1,523 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+span{
+color: white;
+}
+a{
+text-decoration: none;
+color: black;
+}
+.row3{
+  background-image: url("https://minps.org/assets/collegeimg-CjzIcjpw.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 50vh; /* 50% of viewport height */
+  display: flex;
+  align-items: center; /* centers content vertically */
+  justify-content: center;
+  color: #56B4B6;
+  background-attachment: fixed;
+
+}
+
+
+
+
+
+        .info-card {
+            border-radius: 16px;
+            padding: 35px;
+            background: #ffffff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: 0.3s;
+            height: 100%;
+        }
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        .info-icon {
+            width: 70px;
+            height: 70px;
+        }
+        .info-title {
+            color: #00796b;
+            font-size: 26px;
+            font-weight: 700;
+        }
+        .read-more {
+            color: #00796b;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+
+
+
+
+
+
+       .left-box {
+            background: #007c79;
+            color: white;
+            padding: 60px 40px;
+            height: 100%;
+            border-radius: 40px;
+            position: relative;
+            overflow: hidden;
+       }
+
+        /* Semicircle for large screens */
+        .left-box::after {
+            content: "";
+            position: absolute;
+            right: -200px;
+            top: 0;
+            width: 900px;
+            height: 900px;
+            background: #007c79;
+            /*border-radius: 50%;*/
+            border-radius: 15px 50px 30px 5px;
+            z-index: 1;
+        }
+
+        .left-content { position: relative; z-index: 3; }
+
+        .left-title {
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 1.1;
+        }
+
+        .btn-enquire {
+            background: #fff;
+            color: #000;
+            font-weight: 700;
+            padding: 12px 24px;
+            border-radius: 25px;
+            border: none;
+        }
+
+        .right-box {
+            background: #fff;
+            padding: 50px 40px;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .right-title {
+            font-size: 38px;
+            color: #007c79;
+            font-weight: 800;
+        }
+
+        .know-more {
+            color: #0056ff;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        /* RESPONSIVE FIXES */
+        @media (max-width: 992px) {
+            .left-box {
+                border-radius: 25px;
+                padding: 45px 30px;
+            }
+
+            .left-title {
+                font-size: 38px;
+            }
+
+            .right-title {
+                font-size: 32px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .left-box {
+                text-align: center;
+            }
+
+            .left-title {
+                font-size: 34px;
+            }
+
+            .btn-enquire {
+                margin-top: 10px;
+                width: auto;
+            }
+
+            .right-box {
+                padding: 40px 30px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .left-title {
+                font-size: 30px;
+            }
+
+            .right-title {
+                font-size: 28px;
+            }
+        }
+
+
+       .row2{
+       background: white;
+       }
+
+      #chat-widget {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 300px;
+        background: white;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        font-family: Arial;
+      }
+
+      
+.fast-blink-btn {
+    background-color: red;
+    color: white;
+    padding: 10px 22px;
+    border-radius: 6px;
+    border: none;
+    animation: flash 0.8s infinite;
+}
+
+@keyframes flash {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+.newbtn{
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    border-radius: 6px;
+    border: none;
+    animation: flash 0.8s infinite;
+    
+    color: white;
+}
+
+
+
+</style>
+
+<div class="row">
+  <div class="col-lg-8">
+    <div id="mainCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="https://thecareerassistance.com/wp-content/uploads/2025/05/Picture1-67.jpg" class="d-block w-100" alt="slide1">
+        </div>
+        <div class="carousel-item">
+          <img src="https://bookuradmission.com/college_photo/Madhubani%20Medical%20College%20and%20Hospital,%20Madhubani_photo210527053452.jpg" class="d-block w-100" alt="slide2">
+        </div>
+        <div class="carousel-item">
+          <video class="d-block w-100" autoplay muted loop>
+            <source src="https://v.ftcdn.net/03/29/14/16/700_F_329141693_PrJNhdORxTpxrKY6EspAYi3gTRgUvGWA_ST.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="col-lg-4">
+    <div class="card p-3">
+      <h5>Quick Links</h5>
+      <p><a href="{{ url_for('register') }}">Register</a> | <a href="{{ url_for('login') }}">Login</a> | <a href="{{ url_for('get_token') }}">Get Token</a></p>
+      <hr/>
+      <h6>Contact</h6>
+      <p>Hospital Reception: 9570142222</p>
+    </div>
+    <button class=" newbtn fast-blink-btn btn btn-primary"><a href="{{ url_for('online_admission') }}">Online Admission</a></button>
+
+  </div>
+</div>
+<section>
+    <div class="container2">
+        <div class="cont2">
+            <div class="paragraph">
+                <h5>Empowering Healthcare. Transforming Lives.</h5>
+                <p class="p2">An NMC - recognized medical college dedicated to quality education and compassionate care in North Bihar</p>
+                <div class="button">
+                     <a href="{{('register')}}"><button type="button" class="btn btn-primary">Apply Now</button></a>
+                     <a href="#"><button type="button" class="btn btn-warning">learn more</button></a>
+                </div>
+            </div>
+            <div class="box">
+                <div class="icon-section" >
+                    <div class="icon-item">
+                        <i class="bi bi-mortarboard-fill fs-1"></i>
+                        <br>
+                        <span>150</span>
+                        <p class="yel">Admission<br>per year recognize by nmc</p>
+                    </div>
+                    <div class="icon-item">
+                        <i class="bi bi-airplane-fill fs-1"></i>
+                        <br>
+                        <span>30</span>
+                        <p class="yel">Minutes<br>from Darbhanga Airport</p>
+                    </div>
+                    <div class="icon-item">
+                        <i class="bi bi-hospital-fill fs-1"></i>
+                        <br>
+                        <span>975</span>
+                        <p class="yel">Bed<br>Super Speciality Hospital in Campus</p>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<section>
+<div class="container-fluid py-5">
+    <div class="row row2 align-items-center">
+        <!-- LEFT -->
+        <div class="col-lg-6">
+            <div class="left-box">
+                <div class="left-content">
+                    <div class="eyebrow">Beyond Boundaries</div>
+
+                    <!-- Updated heading text -->
+                    <h1 class="left-title">
+                        Madhubani Medical<br>
+                        College and<br>
+                        Hospital
+                    </h1>
+
+                    <button class="btn btn-enquire mt-3"><a href="{{url_for('admission_inquire')}}"> ENQUIRE NOW</a></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="col-lg-6">
+            <div class="right-box bg-white rounded-4 shadow-sm">
+                <div class="py-4">
+                    <h2 class="right-title">INTERNATIONAL<br>PATIENTS</h2>
+
+                    <p class="right-desc">
+                        India is a leading destination for those seeking affordable and high-quality medical treatment.
+                        Madhubani Medical College and Hospital is a trusted choice, offering care that meets international
+                        standards at an affordable price.
+                    </p>
+
+                    <a class="know-more" href="#">Know More &nbsp; →</a>
+
+                    <!-- preview image using the uploaded file local path -->
+                    <!-- file URL (local path): /mnt/data/Screenshot 2025-11-20 111209.png
+                    <div class="mt-4">
+                        <img src="#"
+                             alt="uploaded-screenshot"
+                             class="img-fluid rounded"
+                             style="max-height:240px;">
+
+                    </div>
+                    -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+
+
+
+
+<!--- section2--
+
+<section class="section2">
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="https://bodmaseducation.com/uploads/1748673456_Madhubani%20Medical%20College,%20Madhubani.png" class="d-block w-100 h-80" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="https://scontent.fdel88-1.fna.fbcdn.net/v/t39.30808-6/511006255_1141520337991333_2228916926612175293_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=127cfc&_nc_ohc=Ug0YzcQ79GAQ7kNvwFv50nO&_nc_oc=Adl3UcceqrLuMpsgLIIvuwQv882G1uU65rMpkxU0XET0qQXwhGR29_NVAD9FdHgRLzU&_nc_zt=23&_nc_ht=scontent.fdel88-1.fna&_nc_gid=mD8qCT6gp9QsI68cuxFOMA&oh=00_Afg9qgnneG8veNhhWcbbRZC-lA2uECr4mBPo3NQbt6RPSA&oe=690CF1DA" class="d-block w-100 h-80" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="https://scontent.fdel88-1.fna.fbcdn.net/v/t39.30808-6/501995185_1125517452924955_7962579810579274315_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=127cfc&_nc_ohc=k5wpu716MWsQ7kNvwGmJwMF&_nc_oc=Adnu13fsct37pluIPRskex67td2cFf6aHluoLKk9S4Gu_T2haaoQmFz04Rrq0fOhzPA&_nc_zt=23&_nc_ht=scontent.fdel88-1.fna&_nc_gid=E79RSkLUtToYCtcBY9syEA&oh=00_Afg5Wntg01Pq2P3cwd5NUhSXtEEK13ZgLON2k1JyTlg4Qw&oe=690D024E" class="d-block w-100 h-80" alt="...">
+    </div>
+    <div class="carousel-item">
+        <img src="https://scontent.fdel88-1.fna.fbcdn.net/v/t39.30808-6/501995185_1125517452924955_7962579810579274315_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=127cfc&_nc_ohc=k5wpu716MWsQ7kNvwGmJwMF&_nc_oc=Adnu13fsct37pluIPRskex67td2cFf6aHluoLKk9S4Gu_T2haaoQmFz04Rrq0fOhzPA&_nc_zt=23&_nc_ht=scontent.fdel88-1.fna&_nc_gid=PKokCONGNItWiiqnCPMVmA&oh=00_Afg78qLdc8rGLYKQ5hDN4apUgoFJ-mLOABxEB2HR6ulkRA&oe=690D024E" class="d-block w-100 h-80" alt="...">
+    </div>
+  </div>
+</div>
+</section>
+
+--->
+
+<!---updated-->
+<section>
+    <div class="container3 moon">
+        <div class="row3">
+            <div class="content">
+                <!----
+                <h3>Our <span>Student</span> get placed No.1 Hospital</h3>
+                <p>Health and Education are the two main pillars of human existence, we aim to strengthen the society by providing the best quality of both and contribute towards the growth of the nation.</p>
+                ---->
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- 4th section-->
+<div class="container py-5">
+    <div class="row g-4">
+
+        <!-- 1 - Covid Info -->
+        <div class="col-md-4">
+            <div class="info-card d-flex justify-content-between">
+                <div>
+                    <h3 class="info-title">Covid-19 Information</h3>
+                    <p>Stay safe during COVID-19. Read our updates on vaccines, symptoms, and prevention
+                        measures to protect yourself and your loved ones.</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+                <img src="https://cdn-icons-png.flaticon.com/512/3004/3004618.png" class="info-icon">
+            </div>
+        </div>
+
+        <!-- 2 - Preventive Healthcare -->
+        <div class="col-md-4">
+            <div class="info-card d-flex justify-content-between">
+                <div>
+                    <h3 class="info-title">Preventive Healthcare</h3>
+                    <p>Stay ahead of illness by embracing proactive health measures for better well-being.</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+                <img src="https://cdn-icons-png.flaticon.com/512/2966/2966489.png" class="info-icon">
+            </div>
+        </div>
+
+        <!-- 3 - Billing Info -->
+        <div class="col-md-4">
+            <div class="info-card d-flex justify-content-between">
+                <div>
+                    <h3 class="info-title">Billing Info</h3>
+                    <p>Simplify hospital bills. Know payment modes, OPD, IPD, emergency billing & more.</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+                <img src="https://cdn-icons-png.flaticon.com/512/3523/3523063.png" class="info-icon">
+            </div>
+        </div>
+
+        <!-- 4 - Payment Methods -->
+        <div class="col-md-4">
+            <div class="info-card d-flex justify-content-between">
+                <div>
+                    <h3 class="info-title">Payment Methods</h3>
+                    <p>Choose from multiple payment modes to make your hospital visit hassle-free.</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+                <img src="https://cdn-icons-png.flaticon.com/512/126/126122.png" class="info-icon">
+            </div>
+        </div>
+
+        <!-- 5 - Insurance & TPA -->
+        <div class="col-md-4">
+            <div class="info-card d-flex justify-content-between">
+                <div>
+                    <h3 class="info-title">Insurance & TPA</h3>
+                    <p>Get seamless, worry-free treatment with our insurance & TPA support services.</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+                <img src="https://cdn-icons-png.flaticon.com/512/2920/2920251.png" class="info-icon">
+            </div>
+        </div>
+
+        <!-- 6 - Ambulance Services -->
+        <div class="col-md-4">
+            <div class="info-card d-flex justify-content-between">
+                <div>
+                    <h3 class="info-title">Ambulance Services</h3>
+                    <p>Expert ambulance services for emergencies. Safe and fast hospital transport.</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+                <img src="https://cdn-icons-png.flaticon.com/512/2966/2966327.png" class="info-icon">
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+<!-- third slide--->
+<div class="my-4">
+  <h4>Gallery</h4>
+  <div id="galleryCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <div class="row">
+          <div class="col"><img src="https://www.careermarg.com/uploads/college-image/t-1655798616-madhubani-medical-college-mmch-madhubani-madhubani.jpg" class="img-fluid"></div>
+          <div class="col"><img src="https://thecareerassistance.com/wp-content/uploads/2025/05/Picture1-67.jpg" class="img-fluid"></div>
+          <div class="col"><img src="https://minps.org/assets/collegeimg-CjzIcjpw.png" class="img-fluid"></div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="row">
+          <div class="col"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTW-Tkg2MU6e4X86p8W_gD66M2SxZ2t992yiw&s" class="img-fluid"></div>
+          <div class="col"><img src="https://mbbsadvisor.in/bihar/images/madhubani-medical-college-and-hospital.jpg" class="img-fluid"></div>
+          <div class="col"><img src="https://edufever.in/colleges/wp-content/uploads/2024/05/Madhubani-Medical-College.webp" class="img-fluid"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+const body = document.getElementById("chat-body");
+const input = document.getElementById("chat-input");
+
+input.addEventListener("keydown", function(e){
+  if(e.key === "Enter"){
+    const msg = input.value.toLowerCase();
+    body.innerHTML += "<div>You: " + msg + "</div>";
+
+    if(msg.includes("appointment")){
+      body.innerHTML += "<div>Bot: You can book an appointment online through our appointment page or call reception.</div>";
+    } else if(msg.includes("admission")){
+      body.innerHTML += "<div>Bot: For admission, please visit hospital reception or contact our admission helpdesk.</div>";
+    } else {
+      body.innerHTML += "<div>Bot: Our team will contact you shortly regarding this query.</div>";
+    }
+
+    input.value = "";
+  }
+});
+
+</script>
+
+{% endblock %}

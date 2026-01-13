@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./:/app
+      - ./static:/app/static
+      - ./templates:/app/templates
+    environment:
+      - ADMIN_PASS=admin123
+      - SECRET_KEY=change_me_in_prod
+      - DEV_SMS_BACKEND=console
+    restart: unless-stopped

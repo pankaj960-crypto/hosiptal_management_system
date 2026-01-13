@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Get Token</h3>
+<p>Your details are prefilled; verify and press Get Token.</p>
+<form method="POST">
+  <div class="mb-3">
+    <label>Aadhar</label>
+    <input name="aadhar" class="form-control" value="{{ user.aadhar }}" required>
+  </div>
+  <div class="mb-3">
+    <label>Age</label>
+    <input name="age" type="number" class="form-control" value="{{ user.age }}" required>
+  </div>
+  <div class="mb-3">
+    <label>Mobile</label>
+    <input name="mobile" class="form-control" value="{{ user.mobile }}" required>
+  </div>
+  <div class="mb-3">
+    <label>Medical Problem Number</label>
+    <input name="medical_problem_number" class="form-control" value="{{ user.medical_problem_number }}">
+    <small>Available mapping:</small>
+    <ul>
+    {% for k,v in doctor_map.items() %}
+      <li>{{ k }} → {{ v }}</li>
+    {% endfor %}
+    </ul>
+  </div>
+  <button class="btn btn-success">Get Token</button>
+</form>
+{% endblock %}
